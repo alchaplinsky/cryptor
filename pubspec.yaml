@@ -1,5 +1,5 @@
 name: cryptor
-description: AES GCM cryptor package
+description: AES-256-GCM symmetric encryption functions that allow to encrypt/decrypt package
 version: 0.1.0
 homepage: https://github.com/swiftyapp/cryptor
 
@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  crypto: 2.1.4
-  steel_crypt: 1.7.1+1
-  password_hash: 2.0.0
+  crypto: ^2.1.4
+  steel_crypt: ^1.7.1+1
+  password_hash: ^2.0.0
 
 dev_dependencies:
   flutter_test:
