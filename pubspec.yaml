@@ -1,8 +1,7 @@
 name: cryptor
 description: AES GCM cryptor package
 version: 0.1.0
-author: Alex Chaplinsky
-homepage:
+homepage: https://github.com/swiftyapp/cryptor
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -10,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  crypto: 2.1.4
+  steel_crypt: 1.7.1+1
+  password_hash: 2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -17,9 +19,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-  crypto: 2.1.4
-  steel_crypt: 1.7.1+1
-  password_hash: 2.0.0
 
 # The following section is specific to Flutter.
 flutter:
