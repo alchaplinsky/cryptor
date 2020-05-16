@@ -1,3 +1,7 @@
+## [0.1.2] - Initial implementation of AES GCM cryptor
+
+- Rename example file to be inline with guidelines
+
 ## [0.1.1] - Initial implementation of AES GCM cryptor
 
 - Add dart doc comments to the code
