@@ -1,7 +1,7 @@
 name: cryptor
 description: AES-256-GCM symmetric encryption functions that allow to encrypt/decrypt package
-version: 0.1.3
-homepage: https://github.com/swiftyapp/cryptor
+version: 0.1.4
+homepage: https://github.com/alchaplinsky/cryptor
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

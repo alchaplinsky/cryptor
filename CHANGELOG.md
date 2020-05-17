@@ -1,3 +1,8 @@
+## [0.1.4] - API Change
+
+- encrypt and decrypt are now static methods of Cryptor
+- Implement AesGcm module
+
 ## [0.1.3] - Implement PBKDF2
 
 - Implement PBKDF2
