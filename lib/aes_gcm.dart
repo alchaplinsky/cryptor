@@ -6,7 +6,7 @@ import 'package:steel_crypt/PointyCastleN/export.dart';
 class AesGcm {
   String _key32;
 
-  AesGcm(String this._key32);
+  AesGcm(this._key32);
 
   String encrypt(String input, [String iv = '']) {
     Uint8List key = Uint8List.fromList(_key32.codeUnits);
