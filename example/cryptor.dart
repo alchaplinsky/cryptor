@@ -4,10 +4,8 @@ void main() {
   final text = 'SOME DATA TO ENCRYPT';
   final password = 'password';
 
-  final cryptor = Cryptor();
-
-  final encrypted = cryptor.encrypt(text, password);
-  final decrypted = cryptor.decrypt(encrypted, password);
+  final encrypted = Cryptor.encrypt(text, password);
+  final decrypted = Cryptor.decrypt(encrypted, password);
 
   print(encrypted);
   print(decrypted);

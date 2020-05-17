@@ -5,8 +5,7 @@ import 'package:cryptor/cryptor.dart';
 void main() {
   test('Encrypts and decrypts string', () {
     final password = 'password';
-    final cryptor = Cryptor();
-    String encrypted = cryptor.encrypt('data', password);
-    expect(cryptor.decrypt(encrypted, password), 'data');
+    String encrypted = Cryptor.encrypt('data', password);
+    expect(Cryptor.decrypt(encrypted, password), 'data');
   });
 }

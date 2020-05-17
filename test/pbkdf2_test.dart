@@ -72,7 +72,6 @@ void main() {
 
   test('Derives 64 bit key from password and salt', () {
     key = generator.generateKey(password, salt, 1000, 64);
-    print(key);
     expect(key, [
       128,
       139,

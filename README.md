@@ -1,11 +1,16 @@
 # cryptor
 
-AES GCM 256 cryptor
+AES-GCM-256 algorithm cryptor
 
 ## Usage
 
 ```dart
-var cryptor = new Cryptor();
-var cryptedtext = cryptor.encrypt('SOME DATA TO ENCRYPT', 'password');
-return cryptor.decrypt(cryptedtext, 'password'); // => 'SOME DATA TO ENCRYPT'
+  var text = 'SOME DATA TO ENCRYPT';
+  var password = 'password';
+
+  var encrypted = Cryptor.encrypt(text, password);
+  var decrypted = Cryptor.decrypt(encrypted, password);
+
+  print(encrypted);
+  print(decrypted);
 ```
