@@ -1,3 +1,9 @@
+## [0.1.5] - Fix pbkdf2 and improvements
+
+- Fix pbkdf2 to generate correct key
+- Reduce number of type conversions
+- Add hash function to hash password
+
 ## [0.1.4] - API Change
 
 - encrypt and decrypt are now static methods of Cryptor
