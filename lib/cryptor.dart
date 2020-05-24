@@ -16,15 +16,19 @@ class Cryptor {
   static const KEY_LENGTH = 32;
   static const KEY_ITERATIONS_COUNT = 100000;
 
+  /// Hashes passed [value] with sha512 algorithm
+  static String hash(String value) {
+    return base64.encode(sha512.convert(utf8.encode(value)).bytes);
+  }
+
   /// Encrypts passed [cleartext] with key generated based on [password] argument
   static String encrypt(String cleartext, String password) {
     Uint8List salt = _generateSalt();
     Uint8List iv = _generateIV();
+    Uint8List key = _pbkdf2(password, salt);
 
-    String key = _pbkdf2(password, salt);
-    String ciphertext = AesGcm(key).encrypt(cleartext, base64.encode(iv));
-    return base64.encode(Uint8List.fromList(
-        _combineInputs(salt, iv, _generateTag(), ciphertext)));
+    String ciphertext = AesGcm(key).encrypt(cleartext, iv);
+    return base64.encode(_combineInputs(salt, iv, _generateTag(), ciphertext));
   }
 
   /// Encrypts passed [cryptedtext] with key generated based on [password] argument
@@ -34,40 +38,33 @@ class Cryptor {
     Uint8List iv = bytes.sublist(SALT_LENGTH, SALT_LENGTH + IV_LENGTH);
     String ciphertext = base64.encode(
         bytes.sublist(SALT_LENGTH + IV_LENGTH + TAG_LENGTH, bytes.length));
-    String key = _pbkdf2(password, salt);
-    return AesGcm(key).decrypt(ciphertext, base64.encode(iv));
+    Uint8List key = _pbkdf2(password, salt);
+    return AesGcm(key).decrypt(ciphertext, iv);
   }
 
-  static List<int> _combineInputs(
+  static Uint8List _combineInputs(
       Uint8List salt, Uint8List iv, Uint8List tag, String ciphertext) {
-    return salt + iv + tag + base64.decode(ciphertext);
+    return Uint8List.fromList(salt + iv + tag + base64.decode(ciphertext));
   }
 
   /// Password Based Key Deriviation function
-  static String _pbkdf2(String password, Uint8List salt) {
+  static Uint8List _pbkdf2(String password, Uint8List salt) {
     PBKDF2 generator = new PBKDF2(sha512);
-    Uint8List bytes = Uint8List.fromList(generator.generateKey(
-        password, base64.encode(salt), KEY_ITERATIONS_COUNT, KEY_LENGTH));
-    return String.fromCharCodes(bytes);
+    return generator.generateKey(
+        password, salt, KEY_ITERATIONS_COUNT, KEY_LENGTH);
   }
 
   /// Generates salt of given length and returns Uint8List result
-  static Uint8List _generateTag() {
-    return _randomBytes(TAG_LENGTH);
-  }
+  static Uint8List _generateTag() => _randomBytes(TAG_LENGTH);
 
   /// Generates salt of given length and returns Uint8List result
-  static Uint8List _generateSalt() {
-    return _randomBytes(SALT_LENGTH);
-  }
+  static Uint8List _generateSalt() => _randomBytes(SALT_LENGTH);
 
   /// Generates initialization vector of given length and returns Uint8List result
-  static Uint8List _generateIV() {
-    return _randomBytes(IV_LENGTH);
-  }
+  static Uint8List _generateIV() => _randomBytes(IV_LENGTH);
 
   /// Generates a random byte sequence of given [length]
-  static List<int> _randomBytes(int length) {
+  static Uint8List _randomBytes(int length) {
     Uint8List buffer = new Uint8List(length);
     Random range = new Random.secure();
     for (int i = 0; i < length; i++) {

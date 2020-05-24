@@ -22,8 +22,8 @@ class PBKDF2 {
   /// Hashes a [password] with a given [salt].
   ///
   /// The length of this return value will be [keyLength].
-  List<int> generateKey(
-      String password, String salt, int rounds, int keyLength) {
+  Uint8List generateKey(
+      String password, Uint8List salt, int rounds, int keyLength) {
     _validateKeyLength(keyLength);
 
     int numberOfBlocks = (keyLength / _blockSize).ceil();
@@ -31,10 +31,9 @@ class PBKDF2 {
     ByteData key = new ByteData(keyLength);
     int offset = 0;
 
-    List<int> saltBytes = utf8.encode(salt);
-    int saltLength = saltBytes.length;
-    ByteData inputBuffer = new ByteData(saltBytes.length + 4)
-      ..buffer.asUint8List().setRange(0, saltBytes.length, saltBytes);
+    int saltLength = salt.length;
+    ByteData inputBuffer = new ByteData(salt.length + 4)
+      ..buffer.asUint8List().setRange(0, salt.length, salt);
 
     for (int blockNumber = 1; blockNumber <= numberOfBlocks; blockNumber++) {
       inputBuffer.setUint8(saltLength, blockNumber >> 24);
