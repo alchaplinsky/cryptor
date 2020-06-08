@@ -1,3 +1,7 @@
+## [0.1.6] - Upgrade steel_crypt version
+
+- Upgrade steel_crypt version to 2.0.0
+
 ## [0.1.5] - Fix pbkdf2 and improvements
 
 - Fix pbkdf2 to generate correct key
