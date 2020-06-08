@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   crypto: ^2.1.4
-  steel_crypt: ^1.7.1+1
+  steel_crypt: ^2.0.0
 
 dev_dependencies:
   flutter_test:
